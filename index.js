@@ -1,3 +1,6 @@
-function sumArray(arr) {
-  return arr.reduce((acc, curr) => acc + curr, 0);
+function capitalizeWords(str) {
+  return str
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 }
