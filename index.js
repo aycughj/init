@@ -1,17 +1,15 @@
-function pathSum(root, sum) {
-  if (!root) return [];
-  const result = [];
-  const path = [];
-  const traverse = (node, sum) => {
-    if (!node) return;
-    path.push(node.val);
-    if (!node.left && !node.right && sum === node.val) {
-      result.push([...path]);
+function findMaxLength(nums) {
+  const map = new Map();
+  map.set(0, -1);
+  let count = 0;
+  let maxLength = 0;
+  for (let i = 0; i < nums.length; i++) {
+    count += nums[i] === 1 ? 1 : -1;
+    if (map.has(count)) {
+      maxLength = Math.max(maxLength, i - map.get(count));
+    } else {
+      map.set(count, i);
     }
-    traverse(node.left, sum - node.val);
-    traverse(node.right, sum - node.val);
-    path.pop();
-  };
-  traverse(root, sum);
-  return result;
+  }
+  return maxLength;
 }
