@@ -1,10 +1,14 @@
-function findTheDifference(s, t) {
-  let result = 0;
-  for (const char of s) {
-    result ^= char.charCodeAt(0);
+function wordBreak(s, wordDict) {
+  const set = new Set(wordDict);
+  const dp = new Array(s.length + 1).fill(false);
+  dp[0] = true;
+  for (let end = 1; end <= s.length; end++) {
+    for (let start = 0; start < end; start++) {
+      if (dp[start] && set.has(s.substring(start, end))) {
+        dp[end] = true;
+        break;
+      }
+    }
   }
-  for (const char of t) {
-    result ^= char.charCodeAt(0);
-  }
-  return String.fromCharCode(result);
+  return dp[s.length];
 }
